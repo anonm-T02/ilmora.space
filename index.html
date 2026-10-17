@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ILMORA ANIME | RU/EN</title>
+  <meta name="description" content="Discover anime and explore official licensed streaming options.">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#catalog" data-i18n="skip">Skip to catalog</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="logo" href="#top" aria-label="ILMORA ANIME home">
+        <span class="logo-mark">ILMORA</span>
+        <span class="logo-sub">ANIME</span>
+      </a>
+
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-i18n-aria="navToggle"
+      >
+        <span data-i18n="menu">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#watch" data-i18n="watchNav">Watch</a></li>
+          <li><a href="#featured" data-i18n="navFeatured">Featured</a></li>
+          <li><a href="#catalog" data-i18n="navCatalog">Catalog</a></li>
+          <li><a href="#discover" data-i18n="navDiscover">Discover</a></li>
+          <li><a href="/about" data-i18n="navAbout">About</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="lang-btn" id="lang" aria-pressed="false">EN / RU</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="headline">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <p class="hero-badge" data-i18n="heroBadge">Anime discovery</p>
+          <h1 id="headline" data-i18n="headline">Discover your next obsession</h1>
+          <p class="hero-lead" id="intro" data-i18n="intro">
+            Discover anime and visit official streaming platforms. Search in English or Russian.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#catalog" id="browse" data-i18n="browse">Explore anime</a>
+            <button type="button" class="btn btn-secondary" id="surprise" data-i18n="surprise">Surprise me</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img
+            class="hero-image"
+            src="assets/hero.webp"
+            alt=""
+            width="720"
+            height="520"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="watch-section shell" id="watch" aria-labelledby="watch-title">
+      <div class="section-head">
+        <h2 id="watch-title" data-i18n="watchTitle">Watch official anime</h2>
+        <p class="section-sub" data-i18n="watchIntro">Full episodes and films from the publisher selection and owner-added sources.</p>
+      </div>
+      <div class="watch-layout">
+        <div>
+          <div class="watch-stage" id="watch-stage">
+            <button class="btn btn-primary" type="button" id="load-player">Load player</button>
+          </div>
+          <div class="watch-meta">
+            <h3 id="watch-selected"></h3>
+            <button class="btn btn-secondary btn-compact" id="unload-player" type="button" hidden>Unload player</button>
+          </div>
+          <p class="section-sub" id="watch-note">Availability and embedding depend on your country and the publisher. If playback is unavailable, open the original video.</p>
+          <a id="watch-original" target="_blank" rel="noopener noreferrer">Open original on YouTube</a>
+          <a class="watch-source" href="https://en.gundam-official.com/feature/gwoy/" target="_blank" rel="noopener noreferrer" data-i18n="watchSource">Publisher's official selection</a>
+        </div>
+        <div class="watch-side">
+          <div class="watch-choices" id="watch-choices" role="group" aria-label="Choose anime video"></div>
+          <p class="watch-status" id="watch-status" role="status" aria-live="polite"></p>
+          <div class="watch-empty" id="watch-empty" hidden></div>
+          <button type="button" class="btn btn-secondary btn-compact watch-more" id="watch-more" hidden>Load more</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="featured" aria-labelledby="featured-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="featured-title" data-i18n="featuredTitle">Featured</h2>
+          <p class="section-sub" data-i18n="featuredSub">Three titles worth opening first.</p>
+        </div>
+        <div class="featured-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+      <div class="shell">
+        <div class="catalog-toolbar">
+          <div class="catalog-heading">
+            <h2 id="catalog-title" data-i18n="catalogTitle">Discover anime</h2>
+          </div>
+          <div class="catalog-controls">
+            <label class="search-field" for="search">
+              <span class="visually-hidden" data-i18n="searchLabel">Search anime</span>
+              <input
+                type="search"
+                id="search"
+                name="q"
+                autocomplete="off"
+                spellcheck="false"
+                data-i18n-placeholder="searchPlaceholder"
+                placeholder="Search anime in Russian or English…"
+              >
+            </label>
+            <div class="genres" id="genres" role="group" aria-label="Genres"></div>
+          </div>
+        </div>
+
+        <p class="visually-hidden" id="result-status" role="status" aria-live="polite"></p>
+        <div class="catalog-grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>
+          <span data-i18n="noResults">No results</span>
+          <button type="button" class="btn btn-secondary btn-compact" id="clear-filters" data-i18n="clearFilters">Clear filters</button>
+        </p>
+
+        <p class="disclaimer" id="disclaimer" data-i18n="disclaimer">
+          ILMORA ANIME is an independent discovery catalog. We don't host or stream copyrighted videos. Availability and languages depend on country and provider.
+        </p>
+      </div>
+    </section>
+
+    <section class="discover" id="discover" aria-labelledby="discover-title">
+      <div class="shell">
+        <div class="discover-panel">
+          <img
+            class="discover-image"
+            src="assets/hero.webp"
+            alt=""
+            width="1200"
+            height="420"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="discover-copy">
+            <h2 id="discover-title" data-i18n="discoverTitle">Worth discovering</h2>
+            <p data-i18n="discoverSub">Browse the full directory and open official sources when you are ready to watch.</p>
+            <a class="btn btn-primary" href="#catalog" data-i18n="discoverCta">Open catalog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="ad-region" id="about" aria-label="Advertisement">
+      <div class="shell ad-shell">
+        <p class="ad-label" data-i18n="adLabel">Advertisement</p>
+        <div class="ad-slot" id="ad-slot">
+          <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-9510066374957209"
+            data-ad-slot="1897726905"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <p class="footer-brand">© 2026 ILMORA ANIME</p>
+      <nav class="footer-nav" aria-label="Legal">
+        <a href="/privacy" data-i18n="privacy">Privacy</a>
+        <a href="/terms" data-i18n="terms">Terms</a>
+        <a href="/about" data-i18n="about">About</a>
+        <a href="/contact" data-i18n="contact">Contact</a>
+        <a href="/admin">Admin</a>
+      </nav>
+    </div>
+  </footer>
+
+  <dialog class="details-dialog" id="details" aria-labelledby="chosen">
+    <form method="dialog" class="dialog-bar" novalidate>
+      <button type="submit" class="dialog-close" value="close" data-i18n="close" aria-label="Close">Close</button>
+    </form>
+    <h2 id="chosen"></h2>
+    <p class="dialog-note" id="dialog-note" data-i18n="dialogNote">Official sources only. Availability depends on your region.</p>
+    <div class="dialog-links">
+      <a id="crunchy" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="crunchy">Search on Crunchyroll</a>
+      <a
+        id="muse"
+        class="btn btn-secondary"
+        href="https://www.youtube.com/@MuseAsia"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-i18n="muse"
+      >Muse Asia official YouTube channel</a>
+    </div>
+  </dialog>
+
+  <script defer src="/app.js"></script>
+  <script defer src="/api.js"></script>
+  <script defer src="/watch.js"></script>
+</body>
+</html>

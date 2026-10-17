@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ILMORA — Admin</title>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#admin-main">Asosiy kontentga o‘tish</a>
+
+  <header class="admin-header">
+    <div class="shell admin-header-inner">
+      <a class="logo" href="/">
+        <span class="logo-mark">ILMORA</span>
+        <span class="logo-sub">ADMIN</span>
+      </a>
+      <nav class="admin-header-nav" aria-label="Admin navigatsiya">
+        <a href="/">Saytga qaytish</a>
+      </nav>
+      <div class="admin-header-actions" id="header-actions" hidden>
+        <button type="button" class="btn btn-secondary btn-compact" id="btn-password">Parolni almashtirish</button>
+        <button type="button" class="btn btn-secondary btn-compact" id="btn-logout">Chiqish</button>
+      </div>
+    </div>
+  </header>
+
+  <p class="admin-status shell" id="status" role="status" aria-live="polite"></p>
+
+  <main class="shell admin-main" id="admin-main">
+    <section class="admin-panel" id="view-loading" aria-labelledby="loading-title">
+      <h1 id="loading-title">Admin panel</h1>
+      <p class="admin-muted">Sessiya tekshirilmoqda…</p>
+    </section>
+
+    <section class="admin-panel" id="view-session-error" hidden aria-labelledby="session-error-title">
+      <h1 id="session-error-title">Ulanish xatosi</h1>
+      <p class="admin-muted" id="session-error-text">Sessiyani yuklab bo‘lmadi.</p>
+      <button type="button" class="btn btn-primary" id="btn-session-retry">Qayta urinish</button>
+    </section>
+
+    <section class="admin-panel admin-auth" id="view-setup" hidden aria-labelledby="setup-title">
+      <h1 id="setup-title">Birinchi o‘rnatish</h1>
+      <p class="admin-muted">Sayt egasi uchun shaxsiy parol yarating.</p>
+      <form id="form-setup" novalidate>
+        <div class="field">
+          <label for="setup-password">Parol</label>
+          <input type="password" id="setup-password" name="password" autocomplete="new-password" minlength="14" maxlength="128" required>
+          <p class="field-hint">Kamida 14 belgi, ko‘pi bilan 128.</p>
+          <p class="field-error" id="setup-password-error" hidden></p>
+        </div>
+        <div class="field">
+          <label for="setup-confirm">Parolni tasdiqlang</label>
+          <input type="password" id="setup-confirm" name="confirm" autocomplete="new-password" minlength="14" maxlength="128" required>
+          <p class="field-error" id="setup-confirm-error" hidden></p>
+        </div>
+        <p class="field-error" id="setup-key-error" hidden></p>
+        <button type="submit" class="btn btn-primary" id="btn-setup">O‘rnatishni tugatish</button>
+      </form>
+    </section>
+
+    <section class="admin-panel admin-auth" id="view-login" hidden aria-labelledby="login-title">
+      <h1 id="login-title">Kirish</h1>
+      <p class="admin-muted">ILMORA video admin paneli.</p>
+      <form id="form-login" novalidate>
+        <div class="field">
+          <label for="login-password">Parol</label>
+          <input type="password" id="login-password" name="password" autocomplete="current-password" maxlength="128" required>
+          <p class="field-error" id="login-password-error" hidden></p>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-login">Kirish</button>
+      </form>
+    </section>
+
+    <section class="admin-app" id="view-app" hidden>
+      <div class="admin-layout">
+        <aside class="admin-library" aria-labelledby="library-title">
+          <div class="admin-library-head">
+            <h1 id="library-title">Videolar</h1>
+            <button type="button" class="btn btn-primary btn-compact" id="btn-new">Yangi video</button>
+          </div>
+
+          <div class="admin-toolbar">
+            <label class="search-field admin-search" for="library-q">
+              <span class="visually-hidden">Qidiruv</span>
+              <input type="search" id="library-q" name="q" autocomplete="off" spellcheck="false" placeholder="Sarlavha yoki seriya…">
+            </label>
+            <label class="admin-filter" for="library-archived">
+              <span class="visually-hidden">Holat filtri</span>
+              <select id="library-archived">
+                <option value="0">Faol</option>
+                <option value="1">Arxivlangan</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="admin-list-meta" id="library-meta" aria-live="polite"></p>
+          <div class="admin-list" id="library-list" role="group"></div>
+          <div class="admin-list-empty" id="library-empty" hidden></div>
+          <div class="admin-pager">
+            <button type="button" class="btn btn-secondary btn-compact" id="btn-prev" disabled>Oldingi</button>
+            <button type="button" class="btn btn-secondary btn-compact" id="btn-next" disabled>Keyingi</button>
+          </div>
+        </aside>
+
+        <section class="admin-editor" aria-labelledby="editor-title">
+          <h2 id="editor-title">Video tahriri</h2>
+          <p class="admin-muted" id="editor-lead">Ro‘yxatdan video tanlang yoki yangisini yarating.</p>
+
+          <form id="form-video" hidden novalidate>
+            <input type="hidden" id="video-id" value="">
+            <input type="hidden" id="video-version" value="">
+
+            <div class="field">
+              <label for="video-kind">Manba turi</label>
+              <select id="video-kind" name="kind">
+                <option value="youtube">YouTube</option>
+                <option value="mp4">MP4 fayl</option>
+              </select>
+              <p class="field-hint" id="kind-hint">Tahrirda manba turi o‘zgarmaydi.</p>
+              <p class="field-error" id="kind-error" hidden></p>
+            </div>
+
+            <div class="field" id="field-youtube">
+              <label for="video-youtube">YouTube havolasi</label>
+              <input type="url" id="video-youtube" name="youtubeUrl" autocomplete="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=…">
+              <p class="field-hint">Faqat HTTPS: youtube.com, www.youtube.com, m.youtube.com, youtu.be</p>
+              <p class="field-error" id="youtube-error" hidden></p>
+            </div>
+
+            <div class="field" id="field-mp4">
+              <label for="video-file">MP4 fayl</label>
+              <input type="file" id="video-file" name="file" accept=".mp4,video/mp4">
+              <p class="field-hint" id="upload-hint">Maksimal 2 GiB. Video saqlashdan oldin yuklash tugashi shart.</p>
+              <p class="field-error" id="file-error" hidden></p>
+              <div class="upload-progress" id="upload-progress" hidden>
+                <p id="upload-progress-text" aria-live="polite">Yuklanmoqda…</p>
+                <progress id="upload-bar" max="100" value="0"></progress>
+                <div class="upload-actions">
+                  <button type="button" class="btn btn-secondary btn-compact" id="btn-upload-cancel">Yuklashni bekor qilish</button>
+                  <button type="button" class="btn btn-secondary btn-compact" id="btn-upload-retry" hidden>Qayta yuklash</button>
+                </div>
+              </div>
+              <p class="admin-muted" id="upload-ready" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="video-title-en">Sarlavha (EN)</label>
+              <input type="text" id="video-title-en" name="titleEn" maxlength="200" required>
+              <p class="field-error" id="title-en-error" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="video-title-ru">Sarlavha (RU)</label>
+              <input type="text" id="video-title-ru" name="titleRu" maxlength="200">
+              <p class="field-hint">Bo‘sh qoldirilsa EN sarlavha ishlatiladi.</p>
+              <p class="field-error" id="title-ru-error" hidden></p>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="video-series">Seriya</label>
+                <input type="text" id="video-series" name="series" maxlength="120">
+              </div>
+              <div class="field">
+                <label for="video-episode">Qism</label>
+                <input type="number" id="video-episode" name="episode" min="1" max="10000" step="1" inputmode="numeric">
+                <p class="field-error" id="episode-error" hidden></p>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="video-language">Til / subtitr</label>
+                <input type="text" id="video-language" name="language" maxlength="160" placeholder="Masalan: JA audio · EN subtitles">
+              </div>
+              <div class="field">
+                <label for="video-sort">Tartib</label>
+                <input type="number" id="video-sort" name="sortOrder" min="0" max="10000" step="1" value="100">
+                <p class="field-error" id="sort-error" hidden></p>
+              </div>
+            </div>
+
+            <div class="field field-check">
+              <label>
+                <input type="checkbox" id="video-published" name="published">
+                Nashr qilinsin
+              </label>
+              <p class="field-hint">Odatiy holat — qoralama (nashr qilinmagan).</p>
+            </div>
+
+            <div class="editor-actions">
+              <button type="submit" class="btn btn-primary" id="btn-save">Saqlash</button>
+              <button type="button" class="btn btn-secondary" id="btn-cancel-edit">Bekor qilish</button>
+              <button type="button" class="btn btn-secondary" id="btn-archive" hidden>Arxivlash</button>
+              <button type="button" class="btn btn-primary" id="btn-restore" hidden>Qayta tiklash</button>
+              <button type="button" class="btn btn-secondary" id="btn-reload-conflict" hidden>Serverdan yangilash</button>
+            </div>
+            <p class="field-error" id="form-error" hidden></p>
+          </form>
+
+          <form id="form-password" class="admin-password" hidden novalidate>
+            <h2>Parolni almashtirish</h2>
+            <p class="admin-muted">Yangi parol barcha sessiyalarni bekor qiladi.</p>
+            <div class="field">
+              <label for="pw-current">Joriy parol</label>
+              <input type="password" id="pw-current" autocomplete="current-password" maxlength="128" required>
+              <p class="field-error" id="pw-current-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="pw-new">Yangi parol</label>
+              <input type="password" id="pw-new" autocomplete="new-password" minlength="14" maxlength="128" required>
+              <p class="field-error" id="pw-new-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="pw-confirm">Yangi parolni tasdiqlang</label>
+              <input type="password" id="pw-confirm" autocomplete="new-password" minlength="14" maxlength="128" required>
+              <p class="field-error" id="pw-confirm-error" hidden></p>
+            </div>
+            <div class="editor-actions">
+              <button type="submit" class="btn btn-primary" id="btn-pw-save">Parolni saqlash</button>
+              <button type="button" class="btn btn-secondary" id="btn-pw-cancel">Bekor qilish</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="admin-dialog" id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog" novalidate class="admin-dialog-inner">
+      <h2 id="confirm-title">Tasdiqlash</h2>
+      <p id="confirm-message"></p>
+      <div class="editor-actions">
+        <button type="submit" class="btn btn-secondary" value="cancel" id="confirm-cancel">Bekor qilish</button>
+        <button type="submit" class="btn btn-primary" value="confirm" id="confirm-ok">Tasdiqlash</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script defer src="/api.js"></script>
+  <script defer src="/admin.js"></script>
+</body>
+</html>

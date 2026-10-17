@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ILMORA ANIME | RU/EN</title>
   <meta name="description" content="Discover anime and explore official licensed streaming options.">
+  <link rel="canonical" href="https://ilmora.space/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ILMORA ANIME">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="ILMORA ANIME | RU/EN">
+  <meta property="og:description" content="Discover anime and explore official licensed streaming options.">
+  <meta property="og:url" content="https://ilmora.space/">
+  <meta property="og:image" content="https://ilmora.space/assets/hero.webp">
+  <meta property="og:image:alt" content="ILMORA ANIME">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ILMORA ANIME | RU/EN">
+  <meta name="twitter:description" content="Discover anime and explore official licensed streaming options.">
+  <meta name="twitter:image" content="https://ilmora.space/assets/hero.webp">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/fonts.css">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -45,9 +61,24 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="headline">
-      <div class="shell hero-inner">
-        <div class="hero-copy">
-          <p class="hero-badge" data-i18n="heroBadge">Anime discovery</p>
+      <div class="hero-media" aria-hidden="true">
+        <img
+          class="hero-image"
+          src="assets/hero.webp"
+          alt=""
+          width="1440"
+          height="900"
+          decoding="async"
+          fetchpriority="high"
+        >
+      </div>
+      <div class="hero-veil" aria-hidden="true"></div>
+      <div class="shell hero-shell">
+        <div class="hero-content">
+          <p class="hero-brand" aria-hidden="true">
+            <span class="hero-brand-mark">ILMORA</span>
+            <span class="hero-brand-sub">ANIME</span>
+          </p>
           <h1 id="headline" data-i18n="headline">Discover your next obsession</h1>
           <p class="hero-lead" id="intro" data-i18n="intro">
             Discover anime and visit official streaming platforms. Search in English or Russian.
@@ -56,17 +87,6 @@
             <a class="btn btn-primary" href="#catalog" id="browse" data-i18n="browse">Explore anime</a>
             <button type="button" class="btn btn-secondary" id="surprise" data-i18n="surprise">Surprise me</button>
           </div>
-        </div>
-        <div class="hero-visual">
-          <img
-            class="hero-image"
-            src="assets/hero.webp"
-            alt=""
-            width="720"
-            height="520"
-            decoding="async"
-            fetchpriority="high"
-          >
         </div>
       </div>
     </section>

@@ -1,0 +1,15 @@
+# Host canonical: www → apex (HTTPS).
+# Also covers plain HTTP hostnames when the edge honors _redirects
+# (Cloudflare Pages). For a custom Node origin behind Cloudflare,
+# enable "Always Use HTTPS" and a www→apex Bulk Redirect / Rule.
+
+https://www.ilmora.space/* https://ilmora.space/:splat 301
+http://www.ilmora.space/* https://ilmora.space/:splat 301
+http://ilmora.space/* https://ilmora.space/:splat 301
+
+# Pretty URLs for static HTML pages (Pages / static hosts).
+/about /about.html 200
+/privacy /privacy.html 200
+/terms /terms.html 200
+/contact /contact.html 200
+/admin /admin.html 200
